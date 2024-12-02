@@ -1,0 +1,26 @@
+server:
+  shutdown: graceful
+  port: 8033
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        server-addr: @nacos.addr@
+        namespace: @nacos.namespace@
+        heart-beat-timeout: 600000
+        port: ${server.port}
+        group: @nacos.group@
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-configs:
+          - application-default.${spring.cloud.nacos.config.file-extension}
+        namespace: @nacos.namespace@
+    inetutils:
+      ignored-interfaces: docker0
+      preferred-networks: 10

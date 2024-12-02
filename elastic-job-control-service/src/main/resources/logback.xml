@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1 seconds">
+
+    <contextName>logback</contextName>
+    <property name="log.path" value="/data/logs/elastic-job"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level [%X{jobId}] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/debug/%d{yyyy-MM,aux}/debug.%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!-- each file should be at most 1GB, keep 30 days worth of history, but at most 30GB -->
+            <maxFileSize>1GB</maxFileSize><!--KB, MB or GB-->
+            <maxHistory>30</maxHistory>
+            <!--By default, totalSizeCap is set to zero, meaning that there is no total size cap-->
+            <totalSizeCap>30GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level [%thread] [%X{jobId}] %logger{36} [%file : %line] %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+
+    <logger name="com.lenovo.moss" level="DEBUG" />
+</configuration>
