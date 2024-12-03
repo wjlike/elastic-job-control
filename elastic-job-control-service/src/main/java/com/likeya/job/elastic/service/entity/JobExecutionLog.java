@@ -10,7 +10,6 @@ import lombok.Data;
  * Elastic job 执行日志
  *
  * @author like
- * @email like18@lenovo.com
  * @date 2024-10-14 17:09:45
  */
 @Data

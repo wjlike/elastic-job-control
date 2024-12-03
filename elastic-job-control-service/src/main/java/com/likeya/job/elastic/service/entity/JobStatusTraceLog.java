@@ -9,7 +9,6 @@ import lombok.Data;
  * 作业状态跟踪日志
  *
  * @author like
- * @email like18@lenovo.com
  * @date 2024-10-14 17:09:49
  */
 @Data
